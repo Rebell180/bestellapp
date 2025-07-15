@@ -1,0 +1,114 @@
+/* 
+Default Colors : 
+
+Main Color : #f47b06 => orange
+Button : #0069dc => blue
+*/
+
+/* #region Header */
+
+header {
+    background-color: #f47b06;
+    height: 10dvh;
+
+    .content{
+        align-items: start;
+        
+        img {
+            height: 10dvh;
+            padding: 1dvw;
+        }
+    }
+}
+
+/* #endregion Header */
+
+/* #region Main */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    max-height: 90dvh;
+
+    .main-content {
+        width: 80%;
+
+        #menu-content {
+            .content {
+                img{
+                    width: 100%;
+                    height: 30dvh;
+                    object-fit: cover;
+                }
+
+                #temp {
+                    width: 100%;
+                    height: 10dvh;
+                    background: lightblue;
+
+                }
+            }
+        }
+    }
+
+    aside {
+        width: 20%;
+        min-width: 200px;
+        
+        background: white;
+        border: 4px solid red;
+        height: 200dvh;;
+        
+
+        @media(max-width: 680px) {
+            z-index: 10;
+            width: 100dvw;
+            height: 100dvh;
+            position: absolute;
+        }
+
+        #cart-content {
+            position: sticky;
+            top: 0;
+
+            #cart-selection-container {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                overflow: auto;
+                height: 50dvh;
+                
+                .cart-entry {
+                    width: 100%;
+                    min-height: 10rem;
+                    height: 10rem;
+                    background: teal;
+                }
+            }
+        }
+    }
+}
+
+/* #endregion Main */
+
+
+
+/* #region googled style for transparent scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px; /* Mostly for vertical scrollbars */
+  height: 8px; /* Mostly for horizontal scrollbars */
+}
+::-webkit-scrollbar-thumb { /* Foreground */
+  background: var(--scrollbar-foreground);
+  background: #f47b06;
+  border-radius: 99px;
+  border: 1px solid black;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track { /* Background */
+  background: var(--scrollbar-background);
+  background: transparent;
+}
+/* #endregion googled style for transparent scrollbar */
