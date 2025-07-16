@@ -1,3 +1,5 @@
+import { Helper } from "./helper";
+
 /**
  * A Single Meal to add to a cart or present it in a menu.
  */
@@ -16,31 +18,17 @@ formattedPrice;
 // #endregion attributes
 
 
-constructor(pName, pDescr, pPrice, pCategory) {
+constructor({pName, pDescr, pPrice, pCategory = 'burger'}={}) {
 
     this.name = pName;
     this.descr = pDescr;
     this.price = pPrice;
     this.category = pCategory;
 
-    this.formattedPrice = this.formatPrice();
+    this.formattedPrice = Helper.formatAmount(this.price);
 }
 
 // #region methods
-
-/**
- * Formatting the price to german default format.
- * 
- * @returns the formatted price as string.
- */
-formatPrice() {
-
-    let fPrice = this.price.toFixed(2);
-    fPrice = fPrice.replace('.', ',');
-    return fPrice + " €";
-
-}
-
 
 // #endregion methods
 

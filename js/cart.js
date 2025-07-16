@@ -1,3 +1,4 @@
+import { CartItem } from "./cartItem";
 import { Meal } from "./meal";
 
 /**
@@ -7,7 +8,7 @@ export class Cart {
 
 // #region attributes
 
-cartitems = [];
+static cartitems = [];
 
 subtotal;
 deliveryPrice = 4.99; 
@@ -44,6 +45,12 @@ formatPrice() {
  */
 addItem(meal) {
 
+    Cart.cartitems.push(new CartItem({
+        pName: meal.mealName,
+        pPrice: meal.mealPrice
+    }))
+
+    
     // new CartItem(meal);
     // Cart.cartitems.push(cartItem);
     // TODO update summary

@@ -22,10 +22,8 @@
     </header>
 
     <main>
-
         <div class="main-content content">
-
-            
+    
             <section id="menu-content">
                 <div class="content">
                     <img src="./assets/img/header-imgs/burger.png" alt="">
@@ -53,57 +51,41 @@
             <section id="selection-content">
                 <div class="content">
 
-                    <div id="menu-item-container" class="menu-item-container">
-                        <img src="./assets/img/header-imgs/burger.png" alt="">
-                        <div id="menu-item-info">
-
-                            <div id="menu-item-head">
-                                <h2>Gericht 1</h3>
-                                <button type="button">
-                                    <img src="./assets/icons/plus-button.png" alt="">
-                                </button>
-                            </div>
-
-                            <p>Zutaten</p>
-                            <p><strong>Preis</strong></p>
-                        </div>
-                    </div>
+                    <!-- Enter items here -->
 
                 </div>
             </section>
 
             <section id="cart-btn-container">
-                <button id="cart-btn" type="button" class="button">Warenkorb</button>
+                <button id="cart-btn" type="button" class="cart-btn">Warenkorb</button>
             </section>
         </div>
 
         <aside class="cart-container">
             <div id="cart-content">
                 <h2>Warenkorb</h2>
-                <section id="cart-selection-container">
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                    <div id="cart-entry0" class="cart-entry"></div>
-                </section>
+                <div id="cart-selection-container">
+                    <!-- Enter items here -->
+                </div>
                 <section id="cart-summary-container">
-                    <p>Zwischensumme:</p>
-                    <p>Lieferkosten: </p>
-                    <p>Gesamt: </p>
+                    <div>
+                        <span>Zwischensumme:</span>
+                        <span id="cart-sub-total">0,00 €</span>
+                    </div>
+                    <div>
+                        <span>Lieferkosten:</span>
+                        <span>4,99 €</span>
+                    </div>
+                    <div>
+                        <span class="cart-sum-total">Gesamt:</span>
+                        <span id="cart-total" class="cart-sum-total">4,99 €</span>
+                    </div>
+                    <p> </p>
+                    <p> </p>
                 </section>
 
                 <section id="cart-btns-container">
-                    <button id="cart-close-btn" type="button">Warenkorb schliessen</button>
+                    <button id="cart-toggle-btn" class="cart-btn" type="button">Warenkorb schliessen</button>
                     <button id="cart-checkout-btn" type="button">bezahlen</button>
                 </section>
             </div>

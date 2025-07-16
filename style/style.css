@@ -42,6 +42,7 @@ main {
 
 
 
+    /* #region Main */
     .main-content {
         width: 80%;
 
@@ -49,6 +50,7 @@ main {
 
             .content {
 
+                background: #f479061c;
                 padding: 0 2rem;
 
                 img{
@@ -77,7 +79,7 @@ main {
                     width: 100%;
                     display: flex;
                     align-items: center;
-                    background: #f479065b;
+                    
                     img{
                         width: 4rem;
                         height: 4rem;
@@ -105,11 +107,8 @@ main {
 
         #selection-content {
 
-            /* width: 100%; */
-
             .content {
                 padding: 0 2rem;
-                /* width: 100%; */
 
                 #menu-item-container {
                     width: 100%;
@@ -129,7 +128,7 @@ main {
 
                         width: 100%;
 
-                        padding: 1rem;
+                        padding: 0 1rem;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
@@ -151,11 +150,12 @@ main {
                                 width: 32px;
                                 height: 32px;
                                 border: none;
+                                background: transparent;
 
 
                                 img {
-                                    width: 32px;
-                                    height: 32px;
+                                    width: 40px;
+                                    height: 40px;
                                 }
                             }
                         }
@@ -173,15 +173,30 @@ main {
                 }
             }
         }
+
+        #cart-btn-container {
+            .cart-btn {
+                width: 40rem;
+                padding: 1rem;
+                color: white;
+                background: #0069dc;
+                border-radius: 16px;
+
+            }
+            
+        }
     }
 
+    /* #endregion Main */
+
+    /* #region Cart */
     aside {
         width: 25%;
         min-width: 250px;
         
         background: white;
-        border: 4px solid red;
         height: 200dvh;;
+        box-shadow: -2px 0px 3px 0px #d0d0d0;
         
 
         @media(max-width: 680px) {
@@ -205,12 +220,38 @@ main {
                 gap: 5px;
                 overflow: auto;
                 height: 50dvh;
+                box-shadow: 2px 0px 3px 0px #d0d0d0;
+                margin-bottom: 2rem;
                 
                 .cart-entry {
                     width: 100%;
-                    min-height: 10rem;
-                    height: 10rem;
-                    background: teal;
+                    min-height: 6rem;
+                    height: 6rem;
+                    /* background: teal; */
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding: 0.5rem 2rem;
+
+                    >div {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        button {
+                            background-color: transparent;
+                            border: none;
+                            img{
+                                width: 24px;
+                                height: 24px;
+                            }
+                        }
+
+                        span {
+                            min-width: 7rem;
+                            text-align: center;
+                        }
+                    }
                 }
             }
 
@@ -218,10 +259,22 @@ main {
 
                 display: flex;
                 flex-direction: column;
+                gap: 0.5rem;
+                padding: 0 5%;
 
-                p {
+                div {
+                    display: flex;
+                    justify-content: space-between;
                     width: 100%;
+                    span {
+                        font-weight: 300;
+                    }
+                    .cart-sum-total {
+                        font-weight: 800;
+                    }
                 }
+
+
 
             }
 
@@ -229,14 +282,18 @@ main {
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
+                padding: 0 5%;
+                margin-top: 2rem;
                 button {
-                    width: 30rem;
+                    width: 100%;
                     padding: 4px;
+                    font-weight: 300;
+                    color: white;
                     border: 1px solid rgba(244, 134, 6, 0.45);
                     border-radius: 16px;
                 }
 
-                #cart-close-btn {
+                .cart-btn {
                     background:  #0069dc;
                 }
 
@@ -249,6 +306,8 @@ main {
 
         }
     }
+
+    /* #endregion Cart */
 }
 
 /* #endregion Main */
