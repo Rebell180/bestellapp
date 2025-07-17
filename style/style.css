@@ -23,13 +23,11 @@ header {
 
 /* #endregion Header */
 
-body {
+/* body {
     @media(max-width: 680px) {
         overflow: none;
     }
-}
-
-
+} */
 
 /* #region Main */
 
@@ -40,17 +38,15 @@ main {
     align-items: start;
     max-height: 90dvh;
 
-
-
     /* #region Main */
     .main-content {
-        width: 80%;
+        width: 75%;
 
         #menu-content {
+            background: #f4790657;
 
             .content {
-
-                background: #f479061c;
+                
                 padding: 0 2rem;
 
                 img{
@@ -75,7 +71,6 @@ main {
                 }
 
                 #category-menu {
-
                     width: 100%;
                     display: flex;
                     align-items: center;
@@ -110,65 +105,66 @@ main {
             .content {
                 padding: 0 2rem;
 
-                #menu-item-container {
+                #menu-items-container {
                     width: 100%;
-                    display: flex;
-                    margin: 2rem;
+                    margin-top: 2rem;
 
-                    border: 2px solid #f47b06;
-
-                    img {
-
-                        width: 150px;
-                        height: 100px;
-                        
-                    }
-
-                    #menu-item-info {
-
+                    .menu-item-container {
                         width: 100%;
-
-                        padding: 0 1rem;
                         display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
+                        border: 2px solid #f47b06;
+                        margin-bottom: 1rem;
 
-                        #menu-item-head {
-
-                            width: 100%;
-                            display: flex;
-                            justify-content: space-between;
-
-                            h2 {
-                                width: 100%;
-                                text-align: start;
-                                padding: 0;
-                                margin: 0;
-                            }
+                        img {    
+                            width: 100px;
+                            height: 100px;
+                            object-fit: cover;
+                        }
+                        
+                        .menu-item-info {
                             
-                            button {
-                                width: 32px;
-                                height: 32px;
-                                border: none;
-                                background: transparent;
-
-
-                                img {
+                            width: 100%;
+                            
+                            padding: 0 1rem;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            
+                            .menu-item-head {
+                                
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                
+                                h2 {
+                                    width: 100%;
+                                    text-align: start;
+                                    padding: 0;
+                                    margin: 0;
+                                }
+                                
+                                button {
                                     width: 40px;
                                     height: 40px;
+                                    border: none;
+                                    background: transparent;
+                                    
+                                    img {
+                                        width: 40px;
+                                        height: 40px;
+                                    }
                                 }
                             }
-                        }
-
-                        p {
-
-
-                            strong {
-                                font-weight: 800;
-                                color: #f47b06;
+                            
+                            p {
+                                
+                                strong {
+                                    font-weight: 800;
+                                    color: #f47b06;
+                                }
                             }
+                            
                         }
-
                     }
                 }
             }
@@ -195,18 +191,19 @@ main {
         min-width: 250px;
         
         background: white;
-        height: 200dvh;;
+        height: 300dvh;
         box-shadow: -2px 0px 3px 0px #d0d0d0;
         
 
         @media(max-width: 680px) {
             z-index: 1;
-            width: 100dvw;
+            width: 100%;
             height: 90dvh;
             position: absolute;
         }
 
         #cart-content {
+            width: 100%;
             position: sticky;
             top: 0;
 
@@ -219,7 +216,7 @@ main {
                 flex-direction: column;
                 gap: 5px;
                 overflow: auto;
-                height: 50dvh;
+                height: 60dvh;
                 box-shadow: 2px 0px 3px 0px #d0d0d0;
                 margin-bottom: 2rem;
                 
@@ -227,7 +224,6 @@ main {
                     width: 100%;
                     min-height: 6rem;
                     height: 6rem;
-                    /* background: teal; */
 
                     display: flex;
                     flex-direction: column;
@@ -311,8 +307,6 @@ main {
 }
 
 /* #endregion Main */
-
-
 
 /* #region googled style for transparent scrollbar */
 
