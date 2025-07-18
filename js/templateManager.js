@@ -19,18 +19,16 @@ export class TemplateManager {
      */
     static getMenuItemTemplate(menuItem) {
         return /*html*/`
-            <div id="${menuItem.mealId}-container" class="menu-item-container">
-                <img src="${menuItem.imgSrc}" alt="">
-                <div class="menu-item-info">
-                    <div class="menu-item-head">
-                        <h2>${menuItem.name}</h3>
-                        <button type="button" id="${menuItem.mealId}-add-btn">
-                            <img src="./assets/icons/plus-button.png" alt="">
-                        </button>
-                    </div>
-                    <p>${menuItem.descr}</p>
-                    <p><strong>${menuItem.formattedPrice}</strong></p>
+            <img src="${menuItem.imgSrc}" alt="">
+            <div class="menu-item-info">
+                <div class="menu-item-head">
+                    <h2>${menuItem.name}</h3>
+                    <button type="button" id="${menuItem.mealId}-add-btn">
+                        <img src="./assets/icons/plus-button.png" alt="">
+                    </button>
                 </div>
+                <p>${menuItem.descr}</p>
+                <p><strong>${menuItem.formattedPrice}</strong></p>
             </div>
         `
     }
@@ -43,23 +41,20 @@ export class TemplateManager {
      */
     static getCartItemTemplate(cartItem) {
         return /*html*/`
-            <!-- <div id="${cartItem.cartId}" class="cart-entry"> -->
-                <p>${cartItem.name}</p>
-
-                <div >
-                    <button id="${cartItem.cartId}-sub-btn">
-                        <img src="./assets/icons/minus-button.png" alt="">
-                    </button>
-                    <span id="${cartItem.cartId}-count">${cartItem.cartCount}</span>
-                    <button id="${cartItem.cartId}-add-btn">
-                        <img src="./assets/icons/plus-button.png" alt="">
-                    </button>
-                    <span id="${cartItem.cartId}-total">${cartItem.inCartTotal}</span>
-                    <button id="${cartItem.cartId}-del-btn">
-                        <img src="./assets/icons/delete-button.png" alt="">
-                    </button>
-                </div>
-            <!-- </div>    -->
+            <p>${cartItem.name}</p>
+            <div >
+                <button id="${cartItem.cartId}-sub-btn">
+                    <img src="./assets/icons/minus-button.png" alt="">
+                </button>
+                <span id="${cartItem.cartId}-count">${cartItem.cartCount}</span>
+                <button id="${cartItem.cartId}-add-btn">
+                    <img src="./assets/icons/plus-button.png" alt="">
+                </button>
+                <span id="${cartItem.cartId}-total">${cartItem.formattedPriceTotal}</span>
+                <button id="${cartItem.cartId}-del-btn">
+                    <img src="./assets/icons/delete-button.png" alt="">
+                </button>
+            </div>
         `
     }   
 

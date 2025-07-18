@@ -4,15 +4,13 @@ import { Meal } from "./meal.js";
 import { CartManager } from "./cartmanager.js";
 import { Helper } from "./helper.js";
 
-
 /**
- * 
+ * The menu manager handles all interactions with the menu including add to cart.
  */
 export class MenuManager {
 
     // #region attributes
     // #endregion attributes
-
 
     // #region methods
 
@@ -28,10 +26,11 @@ export class MenuManager {
                 MenuManager.resetCategories();
             }
             const categoryContainerRef = MenuManager.getCategoryContainer(newMeal.category);
-            categoryContainerRef.appendChild(MenuManager.createHtmlElement(newMeal));
+            categoryContainerRef.appendChild(MenuManager.createMenuElement(newMeal));
         }
 
         this.addMenuEventListener();
+        document.getElementById('menu-cart-toggle-btn').classList.add('d-none');
     }
     
     /**
@@ -66,10 +65,10 @@ export class MenuManager {
      * @param {Meal} meal 
      * @returns an html element to append.
      */
-    static createHtmlElement(meal) {
+    static createMenuElement(meal) {
         const menuItem = document.createElement("div");
-        menuItem.id = meal.cartId;
-        menuItem.classList.add("cart-entry");
+        menuItem.id = meal.mealId;
+        menuItem.classList.add("menu-item-container");
         menuItem.innerHTML = TemplateManager.getMenuItemTemplate(meal);
         return menuItem;
     }
@@ -84,6 +83,9 @@ export class MenuManager {
 
             menuItemBtnRef.addEventListener('click', () => MenuManager.addToCart(menuItem));
         }
+
+        document.getElementById('menu-cart-toggle-btn').addEventListener(
+            'click', () => CartManager.toggleCart());
     }
 
     /**
@@ -92,17 +94,20 @@ export class MenuManager {
      * @param {Meal} menuItem the meal to add. 
      */
     static addToCart(menuItem) {
-        if(menuItem.isInCart){
-            menuItem.cartCount++;
-            Database.saveMealsToLS();
-            CartManager.renderCart();
+
+        const curItem = Database.meals[menuItem.mealIndex];
+        if(curItem.isInCart){
+            curItem.cartCount++;
         }
         else {
-            menuItem.isInCart = true;
-            menuItem.cartCount = 1;
-            menuItem.inCartTotal = menuItem.formattedPrice;
-            CartManager.addMenuItemToCart(menuItem);
+            curItem.isInCart = true;
+            curItem.cartCount = 1;
         }
+        curItem.inCartTotal = curItem.cartCount * curItem.price;
+        curItem.formattedPriceTotal = Helper.formatAmount(curItem.inCartTotal); 
+        const a = Database.meals;
+        Database.saveMealsToLS();
+        CartManager.renderCart();
     }
 
     // #endregion methods

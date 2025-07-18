@@ -9,7 +9,6 @@ import { TemplateManager } from "./templateManager.js";
  */
 export class CartManager {
 
-
     // #region attributes
 
     static cartItems = [];
@@ -19,94 +18,65 @@ export class CartManager {
 
     // #endregion attributes
 
-
     // #region methods
 
     /**
-     * Renders all cart items.
+     * Renders the cart with all entries.
      */
-    static renderCartItems() {
+    static renderCart() {
+        Database.getMealsFromLS();
 
         const cartContainerRef = document.getElementById('cart-selection-container');
         cartContainerRef.innerHTML = "";
-        CartManager.cartItems = Database.getCartData();
 
-        for(let i = 0; i < CartManager.cartItems.length; i++) {
-            const curItem = CartManager.cartItems[i];
-            curItem.cartIndex = i;
-            // const element = createElement('div');
-            // element.innerHTML = TemplateManager.getCartItemTemplate(curItem);
-            cartContainerRef.innerHTML += TemplateManager.getCartItemTemplate(curItem);   
-            // cartContainerRef.appendChild(element);
-        }
+        for(let i = 0; i < Database.meals.length; i++) {
+            const curMeal = Database.meals[i];
 
-        const cartBtnRef = document.getElementById('cart-btn');
-        cartBtnRef.classList.add('d-none');
-
-        CartManager.updateSummary();
-        CartManager.addAllCartItemEventListener();
-        CartManager.addCartEventListener();
-    }
-
-    /**
-     * Renders one cart item.
-     */
-    static renderCartItem(cartItem) {
-
-        const cartContainerRef = document.getElementById('cart-selection-container');
-        CartManager.cartItems = Database.getCartData();
-
-        for(let i = 0; i < CartManager.cartItems.length; i++) {
-            const curItem = CartManager.cartItems[i];
-
-            if(curItem.cartId == cartItem.cartId){
-                cartContainerRef.innerHTML += TemplateManager.getCartItemTemplate(curItem);   
-                CartManager.updateSummary();
-                CartManager.addCartItemEventListener(curItem);
+            if(curMeal.isInCart) {
+                cartContainerRef.appendChild(CartManager.createCartElement(curMeal));   
             }
         }
-    }
-
-    /**
-     * Adds event listener to every cart item.
-     */
-    static addCartItemEventListener(cartItem) {
-            // add button
-            document.getElementById(cartItem.cartId + '-add-btn').addEventListener(
-                'click', () => CartManager.addExistingMenuItemInCart(cartItem)
-            );
-
-            // sub button
-            document.getElementById(cartItem.cartId + '-sub-btn').addEventListener(
-                'click', () => CartManager.subtractMenuItemInCart(cartItem)
-            );
-
-            // del button
-            document.getElementById(cartItem.cartId + '-del-btn').addEventListener(
-                'click', () => CartManager.deleteMenuItemInCart(cartItem)
-            );
-
         
+        CartManager.addCartEventlistener();
+        CartManager.updateSummary();
+        
+        document.getElementById('cart-toggle-btn').classList.add('d-none');
     }
 
     /**
-     * Adds event listener for all cart items.
+     * Creates and returns a cart item as html element.
+     * 
+     * @param {Meal} meal 
+     * @returns a html node element to append containing a cart item
      */
-    static addAllCartItemEventListener() {
-        for(let i = 0; i < CartManager.cartItems.length; i++) {
-            CartManager.addCartItemEventListener(CartManager.cartItems[i]);
+    static createCartElement(meal) {
+        const cartItem = document.createElement("div");
+        cartItem.id = meal.cartId;
+        cartItem.classList.add("cart-entry");
+        cartItem.innerHTML = TemplateManager.getCartItemTemplate(meal);
+        return cartItem;
+    }
+
+    /**
+     * Adds all event listender for cart.
+     */
+    static addCartEventlistener() {
+        for(let i = 0; i < Database.meals.length; i++) {
+
+            if(Database.meals[i].isInCart) {
+                const meal = Database.meals[i];
+
+                document.getElementById(meal.cartId + '-add-btn').addEventListener(
+                    'click', () => CartManager.addExistingMealInCart(meal));
+                document.getElementById(meal.cartId + '-sub-btn').addEventListener(
+                    'click', () => CartManager.subtractMealInCart(meal));
+                document.getElementById(meal.cartId + '-del-btn').addEventListener(
+                    'click', () => CartManager.deleteMealFromCart(meal));
+            }
         }
-    }
-
-    /**
-     * Adds event listener to cart buttons
-     */
-    static addCartEventListener() {
-        const mainCartBtn = document.getElementById('cart-toggle-btn');
-        mainCartBtn.addEventListener('click', () => CartManager.toggleCart());
-
-        const cartBtn = document.getElementById('cart-btn');
-        cartBtn.addEventListener('click', () => CartManager.toggleCart());
+        
+        document.getElementById('cart-toggle-btn').addEventListener(
+            'click', () => CartManager.toggleCart());
     }
 
     /**
@@ -117,8 +87,9 @@ export class CartManager {
         CartManager.total = "";
 
         let tempSubTotal = 0;
-        for(let i = 0; i < CartManager.cartItems.length; i++) {
-            tempSubTotal = tempSubTotal + (CartManager.cartItems[i].price * CartManager.cartItems[i].cartCount);
+        for(let i = 0; i < Database.meals.length; i++) {
+            const cartItem = Database.meals[i];
+            tempSubTotal = tempSubTotal + (cartItem.price * cartItem.cartCount);
         }
         
         CartManager.subtotal = Helper.formatAmount(tempSubTotal);
@@ -130,82 +101,51 @@ export class CartManager {
     }
 
     /**
-     * Adds a new menu item to cart.
-     * 
-     * @param {Meal} menuItem 
-     */
-    static addMenuItemToCart(menuItem) {
-        menuItem.cartCount = 1;
-        CartManager.cartItems.push(menuItem);
-        menuItem.cartIndex = CartManager.cartItems.length - 1;
-        Database.saveCartToLS(CartManager.cartItems);
-        // CartManager.renderCartItem(menuItem);
-        CartManager.renderCartItems();
-    }
-
-    /**
      * Increases the count of a menu item in cart.
      * 
      * @param {Meal} menuItem 
      */
-    static addExistingMenuItemInCart(menuItem) {
+    static addExistingMealInCart(meal) {
+        const cartItem = Database.meals[meal.mealIndex];
 
-        menuItem.cartCount++;
-        menuItem.inCartTotal = Helper.formatAmount(menuItem.cartCount * menuItem.price);
+        cartItem.cartCount++;
+        cartItem.inCartTotal = Helper.formatAmount(cartItem.cartCount * cartItem.price);
 
-        const curItem = CartManager.cartItems[menuItem.cartIndex];
+        document.getElementById(cartItem.cartId + "-count").innerHTML = cartItem.cartCount;
+        document.getElementById(cartItem.cartId + "-total").innerHTML = cartItem.inCartTotal;
 
-        curItem.cartCount = menuItem.cartCount;
-        curItem.inCartTotal = menuItem.inCartTotal;
-
-        document.getElementById(curItem.cartId + "-count").innerHTML = curItem.cartCount;
-        document.getElementById(curItem.cartId + "-total").innerHTML = curItem.inCartTotal;
-
-        Database.saveCartToLS(CartManager.cartItems);
+        Database.saveMealsToLS();
         CartManager.updateSummary();
-        CartManager.renderCartItems();
-        
     }
 
     /**
      * Deletes on item from cart.
      */
-    static deleteMenuItemInCart(cartItem) {
-        const meal = MenuManager.menuItems[cartItem.mealIndex];
-        meal.isInCart = false;
-        meal.mealCount = 0;
-        CartManager.cartItems.splice(cartItem.cartIndex, 1);
-        Database.saveMenuToLS(MenuManager.menuItems);
-        Database.saveCartToLS(CartManager.cartItems);
-        CartManager.renderCartItems();
+    static deleteMealFromCart(meal) {
+        const curMeal = Database.meals[meal.mealIndex];
+        curMeal.isInCart = false;
+        curMeal.mealCount = 0;
+        Database.saveMealsToLS();
+        CartManager.renderCart();
     }
 
     /**
      * subtract one count of a cart item. 
      */
-    static subtractMenuItemInCart(cartItem) {
-        cartItem.cartCount--;
-        cartItem.inCartTotal = Helper.formatAmount(cartItem.cartCount * cartItem.price);
+    static subtractMealInCart(meal) {
+        const curMeal = Database.meals[meal.mealIndex];
+        curMeal.cartCount--;
+        curMeal.inCartTotal = Helper.formatAmount(curMeal.cartCount * curMeal.price);
 
-        if(cartItem.cartCount == 0) {
-            CartManager.deleteMenuItemInCart(cartItem);
+        if(curMeal.cartCount == 0) {
+            CartManager.deleteMealFromCart(curMeal);
         }
         else {
-
-            
-            const curItem = CartManager.cartItems[cartItem.cartIndex];
-            
-            curItem.cartCount = cartItem.cartCount;
-            curItem.inCartTotal = cartItem.inCartTotal;
-            
-            document.getElementById(curItem.cartId + "-count").innerHTML = curItem.cartCount;
-            document.getElementById(curItem.cartId + "-total").innerHTML = curItem.inCartTotal;
-            
-            Database.saveCartToLS(CartManager.cartItems);
+            document.getElementById(curMeal.cartId + "-count").innerHTML = curMeal.cartCount;
+            document.getElementById(curMeal.cartId + "-total").innerHTML = curMeal.inCartTotal;
+            Database.saveMealsToLS();
             CartManager.updateSummary();
-            CartManager.renderCartItems();
         }
-
     }
 
     /**
@@ -215,19 +155,17 @@ export class CartManager {
         const cartContainerRef = document.getElementById('aside-cart-container');
         cartContainerRef.classList.toggle('d-none');
 
-        const cartBtnRef = document.getElementById('cart-btn');
+        const menuCartBtnRef = document.getElementById('menu-cart-toggle-btn');
+        const cartBtnRef = document.getElementById('cart-toggle-btn');
         if(cartContainerRef.classList.contains('d-none')) {
-            cartBtnRef.classList.remove('d-none');
+            cartBtnRef.classList.add('d-none');
+            menuCartBtnRef.classList.remove('d-none');
         }
         else {
-            cartBtnRef.classList.add('d-none');
-            // CartManager.renderCartItems();
+            cartBtnRef.classList.remove('d-none');
+            menuCartBtnRef.classList.add('d-none');
         }
     }
 
     // #endregion methods
-
-
-
-
 }
