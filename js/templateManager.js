@@ -43,7 +43,7 @@ export class TemplateManager {
      */
     static getCartItemTemplate(cartItem) {
         return /*html*/`
-            <div id="${cartItem.cartId}" class="cart-entry">
+            <!-- <div id="${cartItem.cartId}" class="cart-entry"> -->
                 <p>${cartItem.name}</p>
 
                 <div >
@@ -59,7 +59,7 @@ export class TemplateManager {
                         <img src="./assets/icons/delete-button.png" alt="">
                     </button>
                 </div>
-            </div>   
+            <!-- </div>    -->
         `
     }   
 

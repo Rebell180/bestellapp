@@ -10,7 +10,6 @@ static mealCount = 0;
 
 mealId;
 cartId;
-cartIndex;
 mealIndex;
 
 name;
@@ -29,7 +28,7 @@ formattedPriceTotal;
 // #endregion attributes
 
 
-constructor({pName, pDescr, pPrice, pImgSrc, pCategory = 'burger'}={}) {
+constructor({pName, pDescr, pPrice, pImgSrc, pCategory}={}) {
 
     this.mealId = 'menu-' + Meal.mealCount;
     this.cartId = 'cart-' + Meal.mealCount;

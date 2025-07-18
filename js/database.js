@@ -7,78 +7,17 @@ import { Meal } from "./meal.js";
 export class Database {
 
     // #region attributes
+    static meals = [];
     // #endregion attributes
 
 
     // #region methods
 
     /**
-     * Create and return initial menu data
-     * 
-     * @returns initial menu data as menu array
+     * Create and sets initial menu data
      */
-    static getInitialMenuData() {
-        const menuItems = [
-            // #region drinks
-            new Meal({
-                pName: "Coca Cola",
-                pDescr: "0,3 l",
-                pPrice: 2.90,
-                pImgSrc: "../assets/img/meals/drinks.jpg",
-                pCategory: "drinks",
-            }),
-            new Meal({
-                pName: "Fanta",
-                pDescr: "0,3 l",
-                pPrice: 2.90,
-                pImgSrc: "../assets/img/meals/drinks.jpg",
-                pCategory: "drinks",
-            }),
-            new Meal({
-                pName: "Sprite",
-                pDescr: "0,3 l",
-                pPrice: 2.90,
-                pImgSrc: "../assets/img/meals/drinks.jpg",
-                pCategory: "drinks",
-            }),
-            new Meal({
-                pName: "Red Bull",
-                pDescr: "0,2 l",
-                pPrice: 3.60,
-                pImgSrc: "../assets/img/meals/drinks.jpg",
-                pCategory: "drinks",
-            }),
-            new Meal({
-                pName: "Water",
-                pDescr: "0,5 l",
-                pPrice: 2.50,
-                pImgSrc: "../assets/img/meals/drinks.jpg",
-                pCategory: "drinks",
-            }),
-            // #endregion drinks
-            // #region fingerfood
-            new Meal({
-                pName: "Pommes Frites",
-                pDescr: "mit Ketchup und Mayo",
-                pPrice: 5.90,
-                pImgSrc: "../assets/img/meals/pommes.jpg",
-                pCategory: "fingerfood",
-            }),
-            new Meal({
-                pName: "Nuggets",
-                pDescr: "6 Stück mit Ketchup und Süß-Sauer",
-                pPrice: 6.50,
-                pImgSrc: "../assets/img/meals/nuggets.jpg",
-                pCategory: "fingerfood",
-            }),
-            new Meal({
-                pName: "Nuggets",
-                pDescr: "12 Stück mit Ketchup und Süß-Sauer",
-                pPrice: 9.50,
-                pImgSrc: "../assets/img/meals/nuggets.jpg",
-                pCategory: "fingerfood",
-            }),
-            // #endregion fingerfood
+    static setInitialMenuData() {
+        Database.meals = [
             // #region burger
             new Meal({
                 pName: "Stamm Hamburger",
@@ -136,19 +75,75 @@ export class Database {
                 pImgSrc: "../assets/img/meals/veggie-protein-cheese-burger.jpg",
                 pCategory: "burger",
             }),
-            // #endregion burger
+            // #endregion burger           
+            // #region fingerfood
+            new Meal({
+                pName: "Pommes Frites",
+                pDescr: "mit Ketchup und Mayo",
+                pPrice: 5.90,
+                pImgSrc: "../assets/img/meals/pommes.jpg",
+                pCategory: "fingerfood",
+            }),
+            new Meal({
+                pName: "Nuggets",
+                pDescr: "6 Stück mit Ketchup und Süß-Sauer",
+                pPrice: 6.50,
+                pImgSrc: "../assets/img/meals/nuggets.jpg",
+                pCategory: "fingerfood",
+            }),
+            new Meal({
+                pName: "Nuggets",
+                pDescr: "12 Stück mit Ketchup und Süß-Sauer",
+                pPrice: 9.50,
+                pImgSrc: "../assets/img/meals/nuggets.jpg",
+                pCategory: "fingerfood",
+            }),
+            // #endregion fingerfood
+            // #region drinks
+            new Meal({
+                pName: "Coca Cola",
+                pDescr: "0,3 l",
+                pPrice: 2.90,
+                pImgSrc: "../assets/img/meals/drinks.jpg",
+                pCategory: "drinks",
+            }),
+            new Meal({
+                pName: "Fanta",
+                pDescr: "0,3 l",
+                pPrice: 2.90,
+                pImgSrc: "../assets/img/meals/drinks.jpg",
+                pCategory: "drinks",
+            }),
+            new Meal({
+                pName: "Sprite",
+                pDescr: "0,3 l",
+                pPrice: 2.90,
+                pImgSrc: "../assets/img/meals/drinks.jpg",
+                pCategory: "drinks",
+            }),
+            new Meal({
+                pName: "Red Bull",
+                pDescr: "0,2 l",
+                pPrice: 3.60,
+                pImgSrc: "../assets/img/meals/drinks.jpg",
+                pCategory: "drinks",
+            }),
+            new Meal({
+                pName: "Water",
+                pDescr: "0,5 l",
+                pPrice: 2.50,
+                pImgSrc: "../assets/img/meals/drinks.jpg",
+                pCategory: "drinks",
+            }),
+            // #endregion drinks
         ]
-
-        return menuItems;
     }
 
     /**
-     * Save all cart items to local storage. 
-     * 
-     * @param {Meal[]} cartItems an array of meals 
+     * Save current status of meals to local storage.
      */
-    static saveCartToLS(cartItems) {
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+    static saveMealsToLS() {
+        localStorage.setItem('meals', JSON.stringify(Database.meals));
     }
 
     /**
@@ -157,50 +152,15 @@ export class Database {
      * 
      * @returns an array of cart items (Meal)
      */
-    static getCartData() {
-        let tempCart = [];
-        tempCart = JSON.parse(localStorage.getItem('cart'));
+    static getMealsFromLS() {
+        Database.meals = JSON.parse(localStorage.getItem('meals'));
 
-        if(tempCart == null) {
-            this.saveCartToLS(CartManager.cartItems);
-            tempCart = JSON.parse(localStorage.getItem('cart')); 
-        }
-
-        return tempCart;
-    }
-
-    /**
-     * Save the updated or initial data for menu.
-     * 
-     * @param {Meal} menuItems as an array
-     */
-    static saveMenuToLS(menuItems = []) {
-        if(menuItems.length > 0){
-            localStorage.setItem('menu', JSON.stringify(menuItems));
-        }
-        else {
-            localStorage.setItem('menu', JSON.stringify(this.getInitialMenuData()));
+        if(Database.meals == null) {
+            Database.setInitialMenuData();
+            Database.saveMealsToLS();
+            Database.meals = JSON.parse(localStorage.getItem('meals')); 
         }
     }
-
-    /**
-     * Get menu data from local storage. 
-     * Save initial menu data if the local storage is empty. 
-     * 
-     * @returns an array of menu items (Meal)
-     */
-    static getMenuData() {
-        let tempMenu = [];
-        tempMenu = JSON.parse(localStorage.getItem('menu'));
-
-        if(tempMenu == null) {
-            this.saveMenuToLS(this.getInitialMenuData());
-            tempMenu = JSON.parse(localStorage.getItem('menu')); 
-        }
-
-        return tempMenu;
-    }
-
 
     // #endregion methods
 }
