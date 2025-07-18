@@ -5,7 +5,7 @@ import { MenuManager } from "./menumanager.js";
 import { TemplateManager } from "./templateManager.js";
 
 /**
- * 
+ * Handles rendering an interaction with the cart
  */
 export class CartManager {
 
@@ -33,12 +33,19 @@ export class CartManager {
 
         for(let i = 0; i < CartManager.cartItems.length; i++) {
             const curItem = CartManager.cartItems[i];
-
+            curItem.cartIndex = i;
+            // const element = createElement('div');
+            // element.innerHTML = TemplateManager.getCartItemTemplate(curItem);
             cartContainerRef.innerHTML += TemplateManager.getCartItemTemplate(curItem);   
+            // cartContainerRef.appendChild(element);
         }
+
+        const cartBtnRef = document.getElementById('cart-btn');
+        cartBtnRef.classList.add('d-none');
 
         CartManager.updateSummary();
         CartManager.addAllCartItemEventListener();
+        CartManager.addCartEventListener();
     }
 
     /**
@@ -95,7 +102,11 @@ export class CartManager {
      * Adds event listener to cart buttons
      */
     static addCartEventListener() {
+        const mainCartBtn = document.getElementById('cart-toggle-btn');
+        mainCartBtn.addEventListener('click', () => CartManager.toggleCart());
 
+        const cartBtn = document.getElementById('cart-btn');
+        cartBtn.addEventListener('click', () => CartManager.toggleCart());
     }
 
     /**
@@ -124,10 +135,12 @@ export class CartManager {
      * @param {Meal} menuItem 
      */
     static addMenuItemToCart(menuItem) {
+        menuItem.cartCount = 1;
         CartManager.cartItems.push(menuItem);
         menuItem.cartIndex = CartManager.cartItems.length - 1;
         Database.saveCartToLS(CartManager.cartItems);
-        CartManager.renderCartItem(menuItem);
+        // CartManager.renderCartItem(menuItem);
+        CartManager.renderCartItems();
     }
 
     /**
@@ -150,6 +163,8 @@ export class CartManager {
 
         Database.saveCartToLS(CartManager.cartItems);
         CartManager.updateSummary();
+        CartManager.renderCartItems();
+        
     }
 
     /**
@@ -162,7 +177,7 @@ export class CartManager {
         CartManager.cartItems.splice(cartItem.cartIndex, 1);
         Database.saveMenuToLS(MenuManager.menuItems);
         Database.saveCartToLS(CartManager.cartItems);
-        this.renderCartItems();
+        CartManager.renderCartItems();
     }
 
     /**
@@ -188,9 +203,28 @@ export class CartManager {
             
             Database.saveCartToLS(CartManager.cartItems);
             CartManager.updateSummary();
+            CartManager.renderCartItems();
         }
 
     }
+
+    /**
+     * Toggle the visibility of the cart.
+     */
+    static toggleCart() {
+        const cartContainerRef = document.getElementById('aside-cart-container');
+        cartContainerRef.classList.toggle('d-none');
+
+        const cartBtnRef = document.getElementById('cart-btn');
+        if(cartContainerRef.classList.contains('d-none')) {
+            cartBtnRef.classList.remove('d-none');
+        }
+        else {
+            cartBtnRef.classList.add('d-none');
+            // CartManager.renderCartItems();
+        }
+    }
+
     // #endregion methods
 
 

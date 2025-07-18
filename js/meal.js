@@ -24,6 +24,7 @@ formattedPrice;
 isInCart = false;
 cartCount = 0;
 inCartTotal = 0;
+formattedPriceTotal;
 
 // #endregion attributes
 
@@ -45,12 +46,6 @@ constructor({pName, pDescr, pPrice, pImgSrc, pCategory = 'burger'}={}) {
 }
 
 // #region methods
-
-getInCartTotal() {
-    return this.cartCount * this.price;
-}
-
-
 // #endregion methods
 
 
