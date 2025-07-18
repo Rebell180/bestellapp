@@ -1,7 +1,6 @@
 import { Database } from "./database.js";
 import { Helper } from "./helper.js";
 import { Meal } from "./meal.js";
-import { MenuManager } from "./menumanager.js";
 import { TemplateManager } from "./templateManager.js";
 
 /**
@@ -15,6 +14,8 @@ export class CartManager {
     static subtotal;
     static deliveryCost = 4.99;
     static total;
+
+    static hasEventListener = false;
 
     // #endregion attributes
 
@@ -75,8 +76,17 @@ export class CartManager {
             }
         }
         
-        document.getElementById('cart-toggle-btn').addEventListener(
-            'click', () => CartManager.toggleCart());
+        if(!CartManager.hasEventListener) {
+
+            document.getElementById('cart-toggle-btn').addEventListener(
+                'click', () => CartManager.toggleCart());
+            document.getElementById('cart-checkout-btn').addEventListener(
+                'click', () => CartManager.checkout());
+            document.getElementById('cart-new-cart-btn').addEventListener(
+                'click', () => CartManager.checkout());    
+            
+                CartManager.hasEventListener = true;
+        }
     }
 
     /**
@@ -167,5 +177,48 @@ export class CartManager {
         }
     }
 
+    /**
+     * Finish the order or starts a new one.
+     */
+    static checkout() {
+
+
+        const checkoutContentRef = document.getElementById('checkout-content');
+        const cartContentRef = document.getElementById('cart-content');
+        
+        if(cartContentRef.classList.contains('d-none')) {
+            cartContentRef.classList.remove('d-none');
+            checkoutContentRef.classList.add('d-none')
+        }
+        else {
+            cartContentRef.classList.add('d-none');
+            checkoutContentRef.classList.remove('d-none');
+
+            CartManager.clearCart();
+        }
+        
+        
+        
+        CartManager.renderCart();
+    }
+
+    /**
+     * Removes all items from cart.
+     */
+    static clearCart() {
+        if(Database.meals.length != 0){
+
+            for(let i = 0; i < Database.meals.length; i++) {
+                const meal = Database.meals[i];
+                
+                meal.cartCount = 0;
+                meal.isInCart = false;
+                meal.inCartTotal = 0;
+                meal.formattedPriceTotal = "";
+                
+            }
+        }
+        Database.saveMealsToLS();
+    }
     // #endregion methods
 }
