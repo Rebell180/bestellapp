@@ -30,7 +30,7 @@ export class MenuManager {
         }
 
         this.addMenuEventListener();
-        document.getElementById('menu-cart-toggle-btn').classList.add('d-none');
+        document.getElementById('cart-btn-container').classList.add('d-none');
     }
     
     /**

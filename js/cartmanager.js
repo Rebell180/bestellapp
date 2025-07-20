@@ -134,7 +134,7 @@ export class CartManager {
     static deleteMealFromCart(meal) {
         const curMeal = Database.meals[meal.mealIndex];
         curMeal.isInCart = false;
-        curMeal.mealCount = 0;
+        curMeal.cartCount = 0;
         Database.saveMealsToLS();
         CartManager.renderCart();
     }
@@ -165,15 +165,15 @@ export class CartManager {
         const cartContainerRef = document.getElementById('aside-cart-container');
         cartContainerRef.classList.toggle('d-none');
 
-        const menuCartBtnRef = document.getElementById('menu-cart-toggle-btn');
+        const menuCartBtnContainerRef = document.getElementById('cart-btn-container');
         const cartBtnRef = document.getElementById('cart-toggle-btn');
         if(cartContainerRef.classList.contains('d-none')) {
             cartBtnRef.classList.add('d-none');
-            menuCartBtnRef.classList.remove('d-none');
+            menuCartBtnContainerRef.classList.remove('d-none');
         }
         else {
             cartBtnRef.classList.remove('d-none');
-            menuCartBtnRef.classList.add('d-none');
+            menuCartBtnContainerRef.classList.add('d-none');
         }
     }
 
@@ -190,7 +190,7 @@ export class CartManager {
             cartContentRef.classList.remove('d-none');
             checkoutContentRef.classList.add('d-none')
         }
-        else {
+        else if (checkoutContentRef.classList.contains('d-none')){
             cartContentRef.classList.add('d-none');
             checkoutContentRef.classList.remove('d-none');
 

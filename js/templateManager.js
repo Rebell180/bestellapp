@@ -22,7 +22,7 @@ export class TemplateManager {
             <img src="${menuItem.imgSrc}" alt="">
             <div class="menu-item-info">
                 <div class="menu-item-head">
-                    <h2>${menuItem.name}</h3>
+                    <h3>${menuItem.name}</h3>
                     <button type="button" id="${menuItem.mealId}-add-btn">
                         <img src="./assets/icons/plus-button.png" alt="">
                     </button>

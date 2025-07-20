@@ -15,7 +15,7 @@
 <body>
     
 
-    <header>
+    <header id="header-container">
         <div class="content">
             <img src="./assets/img/logo.png" alt="">
         </div>
@@ -25,12 +25,13 @@
         <div class="main-content content">
     
             <section id="menu-content">
-                <div class="content">
-                    <img src="./assets/img/header-imgs/burger.png" alt="">
+                    <div >
+                        <img src="./assets/img/header-imgs/burger.png" alt="">
+                        <img id="small-logo" src="./assets/img/stamm-burger-logo.png" alt="">
                     <div id="header-content">
 
                         <h1>Stamm Burger</h1>
-                        <p>Bewertung: (4.8 von 5 Sternen)</p>
+                        <span>Bewertung: (4.8 von 5 Sternen)</span>
                         <div id="category-menu">
                             <img src="./assets/icons/arrow-right.png" alt="">
                             <nav>
@@ -48,26 +49,26 @@
                             </nav>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </section>
             
             <section id="selection-content">
                 <div class="content">
                     <div id="menu-items-container">
                         <div id="category-container-burger">
-                            <h2>Burger</h2>
+                            <h2 class="category-head">Burger</h2>
                             <div id="category-content-burger">
                                 <!-- Enter items here -->
                             </div>
                         </div>
                         <div id="category-container-fingerfood">
-                            <h2>Fingerfood</h2>
+                            <h2 class="category-head">Fingerfood</h2>
                             <div id="category-content-fingerfood">
                                 <!-- Enter items here -->
                             </div>
                         </div>
-                        <div id="category-container-drinks">
-                            <h2>Getränke</h2>
+                        <div id="category-container-drinks" >
+                            <h2 class="category-head">Getränke</h2>
                             <div id="category-content-drinks">
                                 <!-- Enter items here -->
                             </div>
@@ -77,7 +78,9 @@
             </section>
 
             <section id="cart-btn-container">
-                <button id="menu-cart-toggle-btn" type="button" class="cart-btn">Warenkorb</button>
+                <button id="menu-cart-toggle-btn" type="button"  class="shop-button">
+                    <a href="#header-container">Warenkorb</a>
+                </button>
             </section>
         </div>
 
@@ -105,8 +108,8 @@
                 </section>
 
                 <section id="cart-btns-container">
-                    <button id="cart-toggle-btn" class="" type="button">Warenkorb schliessen</button>
-                    <button id="cart-checkout-btn" type="button">bezahlen</button>
+                    <button id="cart-toggle-btn" class="shop-button" type="button">Warenkorb schliessen</button>
+                    <button id="cart-checkout-btn" class="shop-button" type="button">bezahlen</button>
                 </section>
             </div>
             <div id="checkout-content" class="checkout-container d-none">
@@ -116,7 +119,7 @@
                     <p>Dein Essen wird schon bald bei dir eintreffen.</p>
                     <p>Guten Appetit!</p>
                 </div>
-                <button id="cart-new-cart-btn" type="button">weitere Bestellung</button>
+                <button id="cart-new-cart-btn" type="button" class="shop-button">weitere Bestellung</button>
             </div>
         </aside>
 
