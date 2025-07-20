@@ -12,10 +12,10 @@ export class TemplateManager {
     // #region methods
 
     /**
-     * Creates a html element to render a single menu item. 
+     * Creates html element to render single menu item. 
      * 
-     * @param {Meal} menuItem the menu item to render. 
-     * @returns a html string 
+     * @param {Meal} menuItem menu item to render. 
+     * @returns string containing html. 
      */
     static getMenuItemTemplate(menuItem) {
         return /*html*/`
@@ -34,10 +34,10 @@ export class TemplateManager {
     }
 
     /**
-     * Creates a html element to render a single cart item. 
+     * Creates html element to render single cart item. 
      * 
-     * @param {Meal} cartItem the cart item to render. 
-     * @returns a html string 
+     * @param {Meal} cartItem cart item to render. 
+     * @returns string containing html.
      */
     static getCartItemTemplate(cartItem) {
         return /*html*/`

@@ -24,9 +24,20 @@ export class CartManager {
     /**
      * Renders the cart with all entries.
      */
-    static renderCart() {
+    static render() {
         Database.getMealsFromLS();
 
+        CartManager.renderCart();
+        CartManager.addCartEventlistener();
+        CartManager.updateSummary();
+        
+        document.getElementById('cart-toggle-btn').classList.add('d-none');
+    }
+
+    /**
+     * Renders html elements of cart.
+     */
+    static renderCart() {
         const cartContainerRef = document.getElementById('cart-selection-container');
         cartContainerRef.innerHTML = "";
 
@@ -37,18 +48,13 @@ export class CartManager {
                 cartContainerRef.appendChild(CartManager.createCartElement(curMeal));   
             }
         }
-        
-        CartManager.addCartEventlistener();
-        CartManager.updateSummary();
-        
-        document.getElementById('cart-toggle-btn').classList.add('d-none');
     }
 
     /**
-     * Creates and returns a cart item as html element.
+     * Creates and returns cart item as html element.
      * 
      * @param {Meal} meal 
-     * @returns a html node element to append containing a cart item
+     * @returns html node element to append containing cart item
      */
     static createCartElement(meal) {
         const cartItem = document.createElement("div");
@@ -59,7 +65,7 @@ export class CartManager {
     }
 
     /**
-     * Adds all event listender for cart.
+     * Adds all event listener of cart.
      */
     static addCartEventlistener() {
         for(let i = 0; i < Database.meals.length; i++) {
@@ -90,7 +96,7 @@ export class CartManager {
     }
 
     /**
-     * Updates the current summary. 
+     * Updates current summary. 
      */
     static updateSummary() {
         CartManager.subtotal = "";
@@ -111,7 +117,7 @@ export class CartManager {
     }
 
     /**
-     * Increases the count of a menu item in cart.
+     * Increases count of menu item in cart.
      * 
      * @param {Meal} menuItem 
      */
@@ -129,18 +135,18 @@ export class CartManager {
     }
 
     /**
-     * Deletes on item from cart.
+     * Deletes an item of cart.
      */
     static deleteMealFromCart(meal) {
         const curMeal = Database.meals[meal.mealIndex];
         curMeal.isInCart = false;
         curMeal.cartCount = 0;
         Database.saveMealsToLS();
-        CartManager.renderCart();
+        CartManager.render();
     }
 
     /**
-     * subtract one count of a cart item. 
+     * Subtract one count of cart item. 
      */
     static subtractMealInCart(meal) {
         const curMeal = Database.meals[meal.mealIndex];
@@ -159,7 +165,7 @@ export class CartManager {
     }
 
     /**
-     * Toggle the visibility of the cart.
+     * Toggle display of cart.
      */
     static toggleCart() {
         const cartContainerRef = document.getElementById('aside-cart-container');
@@ -181,8 +187,6 @@ export class CartManager {
      * Finish the order or starts a new one.
      */
     static checkout() {
-
-
         const checkoutContentRef = document.getElementById('checkout-content');
         const cartContentRef = document.getElementById('cart-content');
         
@@ -197,9 +201,7 @@ export class CartManager {
             CartManager.clearCart();
         }
         
-        
-        
-        CartManager.renderCart();
+        CartManager.render();
     }
 
     /**
@@ -207,7 +209,6 @@ export class CartManager {
      */
     static clearCart() {
         if(Database.meals.length != 0){
-
             for(let i = 0; i < Database.meals.length; i++) {
                 const meal = Database.meals[i];
                 
@@ -215,10 +216,10 @@ export class CartManager {
                 meal.isInCart = false;
                 meal.inCartTotal = 0;
                 meal.formattedPriceTotal = "";
-                
             }
+
+            Database.saveMealsToLS();
         }
-        Database.saveMealsToLS();
     }
     // #endregion methods
 }

@@ -1,11 +1,12 @@
 import { Helper } from "./helper.js";
 
 /**
- * A Single Meal to add to a cart or present it in a menu.
+ * A Single Meal add to cart or presenting in menu.
  */
 export class Meal {
 
 // #region attributes
+
 static mealCount = 0;
 
 mealId;
@@ -16,6 +17,7 @@ name;
 descr;
 price;
 imgSrc;
+imgAlt;
 category;
 
 formattedPrice;
@@ -27,8 +29,7 @@ formattedPriceTotal;
 
 // #endregion attributes
 
-
-constructor({pName, pDescr, pPrice, pImgSrc, pCategory}={}) {
+constructor({pName, pDescr, pPrice, pImgSrc, pImgAlt, pCategory}={}) {
 
     this.mealId = 'menu-' + Meal.mealCount;
     this.cartId = 'cart-' + Meal.mealCount;
@@ -39,6 +40,7 @@ constructor({pName, pDescr, pPrice, pImgSrc, pCategory}={}) {
     this.price = pPrice;
     this.category = pCategory;
     this.imgSrc = pImgSrc;
+    this.imgAlt = pImgAlt;
     this.formattedPrice = Helper.formatAmount(this.price);
 
     Meal.mealCount++;

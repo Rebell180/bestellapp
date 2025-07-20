@@ -7,9 +7,10 @@ import { Meal } from "./meal.js";
 export class Database {
 
     // #region attributes
-    static meals = [];
-    // #endregion attributes
 
+    static meals = [];
+
+    // #endregion attributes
 
     // #region methods
 
@@ -24,6 +25,7 @@ export class Database {
                 pDescr: "240g Beef patty",
                 pPrice: 7.50,
                 pImgSrc: "../assets/img/meals/hamburger.jpg",
+                pImgAlt: "shows a hamburger on a tree trunk",
                 pCategory: "burger",
             }),
             new Meal({
@@ -31,6 +33,7 @@ export class Database {
                 pDescr: "240g Beef patty mit cheddar",
                 pPrice: 8.50,
                 pImgSrc: "../assets/img/meals/cheese-burger.jpg",
+                pImgAlt: "shows a big cheeseburger with pickled cucubvers, cheese, tomatoes beef ans lettuce",
                 pCategory: "burger",
             }),
             new Meal({
@@ -38,6 +41,7 @@ export class Database {
                 pDescr: "2 x 165g Beef patty",
                 pPrice: 9.90,
                 pImgSrc: "../assets/img/meals/double-cheese-burger.jpg",
+                pImgAlt: "shows a cheeseburger with double bread and double beef",
                 pCategory: "burger",
             }),
             new Meal({
@@ -45,6 +49,7 @@ export class Database {
                 pDescr: "2 x 240g Beef patty",
                 pPrice: 11.90,
                 pImgSrc: "../assets/img/meals/double-beef-cheese-burger.png",
+                pImgAlt: "shows a cheeseburger with double beef and double cheese",
                 pCategory: "burger",
             }),
             new Meal({
@@ -52,6 +57,7 @@ export class Database {
                 pDescr: "240g Beef patty, Onionrings, Bacon",
                 pPrice: 13.90,
                 pImgSrc: "../assets/img/meals/black-beef-burger.jpg",
+                pImgAlt: "shows a burger with black bread, bacon, beef, cheese an two onion rings above",
                 pCategory: "burger",
             }),
             new Meal({
@@ -59,6 +65,7 @@ export class Database {
                 pDescr: "4 x 240g Beef patty",
                 pPrice: 18.90,
                 pImgSrc: "../assets/img/meals/quattro-beef-boon-burger.jpg",
+                pImgAlt: "shows a big burger with 4 piles of beef with cheese and lettuce with double bread",
                 pCategory: "burger",
             }),
             new Meal({
@@ -66,6 +73,7 @@ export class Database {
                 pDescr: "240g plant based patty",
                 pPrice: 9.90,
                 pImgSrc: "../assets/img/meals/veggie-cheese-burger.jpg",
+                pImgAlt: "shows a burger with lettuce and a veggie patty with cheese",
                 pCategory: "burger",
             }),
             new Meal({
@@ -73,6 +81,7 @@ export class Database {
                 pDescr: "240g plant based patty",
                 pPrice: 10.90,
                 pImgSrc: "../assets/img/meals/veggie-protein-cheese-burger.jpg",
+                pImgAlt: "shows a burger with lettuce and a veggie patty with cheese",
                 pCategory: "burger",
             }),
             // #endregion burger           
@@ -82,6 +91,7 @@ export class Database {
                 pDescr: "mit Ketchup und Mayo",
                 pPrice: 5.90,
                 pImgSrc: "../assets/img/meals/pommes.jpg",
+                pImgAlt: "A portion of crispy fried fries on a plate",
                 pCategory: "fingerfood",
             }),
             new Meal({
@@ -89,6 +99,7 @@ export class Database {
                 pDescr: "6 Stück mit Ketchup und Süß-Sauer",
                 pPrice: 6.50,
                 pImgSrc: "../assets/img/meals/nuggets.jpg",
+                pImgAlt: "A portion of crispy fried nuggets on a plate",
                 pCategory: "fingerfood",
             }),
             new Meal({
@@ -96,6 +107,7 @@ export class Database {
                 pDescr: "12 Stück mit Ketchup und Süß-Sauer",
                 pPrice: 9.50,
                 pImgSrc: "../assets/img/meals/nuggets.jpg",
+                pImgAlt: "A portion of crispy fried nuggets on a plate",
                 pCategory: "fingerfood",
             }),
             // #endregion fingerfood
@@ -105,6 +117,7 @@ export class Database {
                 pDescr: "0,3 l",
                 pPrice: 2.90,
                 pImgSrc: "../assets/img/meals/drinks.jpg",
+                pImgAlt: "Shows a glass of water, three ice cubes and yellow background lighting",
                 pCategory: "drinks",
             }),
             new Meal({
@@ -112,6 +125,7 @@ export class Database {
                 pDescr: "0,3 l",
                 pPrice: 2.90,
                 pImgSrc: "../assets/img/meals/drinks.jpg",
+                pImgAlt: "Shows a glass of water, three ice cubes and yellow background lighting",
                 pCategory: "drinks",
             }),
             new Meal({
@@ -119,6 +133,7 @@ export class Database {
                 pDescr: "0,3 l",
                 pPrice: 2.90,
                 pImgSrc: "../assets/img/meals/drinks.jpg",
+                pImgAlt: "Shows a glass of water, three ice cubes and yellow background lighting",
                 pCategory: "drinks",
             }),
             new Meal({
@@ -126,6 +141,7 @@ export class Database {
                 pDescr: "0,2 l",
                 pPrice: 3.60,
                 pImgSrc: "../assets/img/meals/drinks.jpg",
+                pImgAlt: "Shows a glass of water, three ice cubes and yellow background lighting",
                 pCategory: "drinks",
             }),
             new Meal({
@@ -133,6 +149,7 @@ export class Database {
                 pDescr: "0,5 l",
                 pPrice: 2.50,
                 pImgSrc: "../assets/img/meals/drinks.jpg",
+                pImgAlt: "Shows a glass of water, three ice cubes and yellow background lighting",
                 pCategory: "drinks",
             }),
             // #endregion drinks

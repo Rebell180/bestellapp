@@ -15,13 +15,7 @@ html {
 body {
     font-size: clamp(16px, 2dvw, 30px);
     background: #f4790657;
-
-    /* TODO */
-    /* @media (max-width: 680px) {
-        overflow-y: hidden;
-    } */
 }
-
 
 section, 
 header, 
@@ -62,7 +56,7 @@ input,
 span, 
 label,
 button , tr{
-    font-size: clamp(1.6rem, 1.5dvh, 2.8rem);
+    font-size: clamp(16px, 1.5dvh, 2.8rem);
     font-weight: bold;
 }
 

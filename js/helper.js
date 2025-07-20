@@ -10,10 +10,10 @@ export class Helper {
     // #region methods
 
     /**
-     * Formats a number to a german amount as string.
+     * Formats number to german amount as string.
      * 
-     * @param {number} numberToFormat 
-     * @returns a formatted german amount as string.
+     * @param {number} numberToFormat number to format.
+     * @returns formatted german amount as string.
      */
     static formatAmount(numberToFormat) {
         let fPrice = numberToFormat.toFixed(2);

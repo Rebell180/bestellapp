@@ -17,9 +17,19 @@ export class MenuManager {
     /**
      * Renders the full menu with all items.
      */
-    static renderMenu() {
+    static render() {
         Database.getMealsFromLS();
+        MenuManager.renderMenu();
+        
+        this.addMenuEventListener();
 
+        document.getElementById('cart-btn-container').classList.add('d-none');
+    }
+
+    /**
+     * Renders html elements of menu.
+     */
+    static renderMenu() {
         for(let i = 0; i < Database.meals.length; i++) {
             const newMeal = Database.meals[i];
             if (i == 0){
@@ -28,13 +38,10 @@ export class MenuManager {
             const categoryContainerRef = MenuManager.getCategoryContainer(newMeal.category);
             categoryContainerRef.appendChild(MenuManager.createMenuElement(newMeal));
         }
-
-        this.addMenuEventListener();
-        document.getElementById('cart-btn-container').classList.add('d-none');
     }
     
     /**
-     * Clear the html content for all categories.
+     * Clear html content of all categories.
      */
     static resetCategories() {
         document.getElementById('category-content-burger').innerHTML = "";
@@ -60,7 +67,7 @@ export class MenuManager {
     }
 
     /**
-     * Create and define a html element for representing a meal in menu.
+     * Create and define html element for representing meal in menu.
      * 
      * @param {Meal} meal 
      * @returns an html element to append.
@@ -74,7 +81,7 @@ export class MenuManager {
     }
 
     /**
-     * Adds the event listener for menu items.
+     * Adds event listener for menu items.
      */
     static addMenuEventListener() {      
         for(let i = 0; i < Database.meals.length; i++) {
@@ -89,7 +96,7 @@ export class MenuManager {
     }
 
     /**
-     * Adds a meal to cart.
+     * Adds meal to cart.
      * 
      * @param {Meal} menuItem the meal to add. 
      */
@@ -107,7 +114,7 @@ export class MenuManager {
         curItem.formattedPriceTotal = Helper.formatAmount(curItem.inCartTotal); 
         const a = Database.meals;
         Database.saveMealsToLS();
-        CartManager.renderCart();
+        CartManager.render();
     }
 
     // #endregion methods
